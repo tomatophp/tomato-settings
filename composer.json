@@ -1,0 +1,50 @@
+{
+    "name": "tomatophp/tomato-settings",
+    "type": "library",
+    "description": "Full Settings Generator / Manager with GUI",
+    "keywords": [
+        "Splade",
+        "Breeze",
+        "inertiajs",
+        "vuejs",
+        "blade",
+        "php8",
+        "laravel",
+        "settings"
+    ],
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "TomatoPHP\\TomatoSettings\\": "src/"
+        },
+        "files": [
+            "src/helpers.php"
+        ]
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "TomatoPHP\\TomatoSettings\\TomatoSettingsServiceProvider"
+            ]
+        }
+    },
+    "authors": [
+        {
+            "name": "Fady Mondy",
+            "email": "EngFadyMondy@gmail.com"
+        }
+    ],
+    "require": {
+        "php": "^8.0.2",
+        "tomatophp/tomato-admin": "^1.0",
+        "tomatophp/tomato-components": "^1.0",
+        "tomatophp/tomato-roles": "^1.0",
+        "tomatophp/console-helpers": "^1.0",
+        "spatie/laravel-settings": "*"
+    }
+}
