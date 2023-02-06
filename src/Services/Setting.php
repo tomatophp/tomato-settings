@@ -60,8 +60,8 @@ class Setting extends Controller
         //Save Media
         foreach ($media as $item) {
             if ($request->hasFile($item)) {
-                $request->file($item)->storeAs('public/settings', $item .  '.'.$request->file($item)->getExtension());
-                $setting->{$item} = url('storage/settings/'.$item .'.'.$request->file($item)->getExtension());
+                $request->file($item)->storeAs('public/settings', $item .  '.'.$request->file($item)->extension());
+                $setting->{$item} = url('storage/settings/'.$item .'.'.$request->file($item)->extension());
             }
         }
 

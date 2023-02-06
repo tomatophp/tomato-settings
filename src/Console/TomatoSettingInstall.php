@@ -45,7 +45,6 @@ class TomatoSettingInstall extends Command
     {
         $this->info('🍅 Publish Settings Vendor Assets');
         $this->callSilent('optimize:clear');
-        $this->call('vendor:publish', ['--provider' => 'TomatoPHP\TomatoSettings\TomatoSettingsServiceProvider']);
         $this->call('tomato-components:install');
         $this->artisanCommand(["migrate"]);
         $this->artisanCommand(["optimize:clear"]);

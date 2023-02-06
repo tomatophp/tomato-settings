@@ -38,22 +38,22 @@ class TomatoSettingsServiceProvider extends ServiceProvider
         //Publish Views
         $this->publishes([
             __DIR__.'/../resources/views' => resource_path('views/vendor/tomato-settings'),
-        ], 'views');
+        ], 'tomato-settings-views');
 
         //Publish Config
         $this->publishes([
             __DIR__.'/../config/tomato-settings.php' => config_path('tomato-settings.php'),
-        ], 'config');
+        ], 'tomato-settings-config');
 
         //Publish Lang
         $this->publishes([
-            __DIR__.'/../resources/lang' => resource_path('lang/vendor/tomato-settings'),
-        ], 'lang');
+            __DIR__.'/../resources/lang' => app_path('lang/vendor/tomato-settings'),
+        ], 'tomato-settings-lang');
 
         //Publish Migrations
         $this->publishes([
             __DIR__.'/../database/migrations' => database_path('migrations'),
-        ], 'migrations');
+        ], 'tomato-settings-migrations');
 
         //Register generate command
         $this->commands([
