@@ -162,22 +162,6 @@ class TomatoSettingsServiceProvider extends ServiceProvider
                 'name' => setting('mail_from_name'),
             ]);
 
-            SEO::canonical(url('/'));
-            SEO::title(setting('site_name'));
-            SEO::description(setting('site_description'));
-            SEO::keywords(setting('site_keywords'));
-
-            SEO::openGraphType('WebPage');
-            SEO::openGraphSiteName(setting('site_name'));
-            SEO::openGraphTitle(setting('site_name'));
-            SEO::openGraphUrl(url('/'));
-            SEO::openGraphImage(setting('site_profile'));
-
-            SEO::twitterCard('summary_large_image');
-            SEO::twitterTitle(setting('site_name'));
-            SEO::twitterDescription(setting('site_description'));
-            SEO::twitterImage(setting('site_profile'));
-
         }
         catch (\Exception $e){
             \Log::error($e);
