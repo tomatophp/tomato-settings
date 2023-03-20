@@ -16,6 +16,9 @@
     "autoload": {
         "psr-4": {
             "TomatoPHP\\TomatoSettings\\": "src/"
+        },
+        "files": {
+            "src/helpers.php"
         }
     },
     "autoload-dev": {
