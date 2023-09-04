@@ -16,7 +16,7 @@
                         @endif
                     </div>
                     <div>
-                        <x-tomato-repeater :options="[
+                        <x-tomato-admin-repeater :options="[
                         'vendor',
                         'api_key',
                         'secret_key',
@@ -28,7 +28,7 @@
                                 <x-splade-input name="secret_key" v-model="repeater.main[key].secret_key" id="secret_key" :placeholder="trans('tomato-settings::global.services.sections.sms.secret_key')" required/>
                                 <x-splade-input name="email" v-model="repeater.main[key].email" id="email" :placeholder="trans('tomato-settings::global.services.sections.sms.email')" />
                             </div>
-                        </x-tomato-repeater>
+                        </x-tomato-admin-repeater>
                         @if(config('tomato-settings.helpers'))
                             <div v-if="form.sms_active" class="p-1">
                                 <small class="text-red-500"><code>setting('sms_vendors')</code></small>
@@ -62,7 +62,7 @@
                         @endif
                     </div>
                     <div>
-                        <x-tomato-repeater :options="[
+                        <x-tomato-admin-repeater :options="[
                         'vendor',
                         'api_key',
                         'secret_key',
@@ -74,7 +74,7 @@
                                 <x-splade-input name="secret_key" v-model="repeater.main[key].secret_key" id="secret_key" :placeholder="trans('tomato-settings::global.services.sections.shipping.secret_key')" required/>
                                 <x-splade-input name="email" v-model="repeater.main[key].email" id="email" :placeholder="trans('tomato-settings::global.services.sections.shipping.email')"/>
                             </div>
-                        </x-tomato-repeater>
+                        </x-tomato-admin-repeater>
                         @if(config('tomato-settings.helpers'))
                             <div v-if="form.shipping_active" class="p-1">
                                 <small class="text-red-500"><code>setting('shipping_vendors')</code></small>

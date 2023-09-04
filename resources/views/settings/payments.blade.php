@@ -16,7 +16,7 @@
                         @endif
                     </div>
                     <div>
-                        <x-tomato-repeater v-if="form.payment_online" :options="[
+                        <x-tomato-admin-repeater v-if="form.payment_online" :options="[
                         'vendor', 'api_key', 'secret_key','email'
                     ]"  id="payment_vendors" option-label="name" name="payment_vendors" type="text" :label="trans('tomato-settings::global.payments.sections.gate.payment_vendors')">
                             <div class="flex flex-col space-y-4">
@@ -25,7 +25,7 @@
                                 <x-splade-input name="secret_key" v-model="repeater.main[key].secret_key" id="secret_key" :placeholder="trans('tomato-settings::global.payments.sections.gate.secret_key')" required/>
                                 <x-splade-input name="email" v-model="repeater.main[key].email" id="email" :placeholder="trans('tomato-settings::global.payments.sections.gate.email')"/>
                             </div>
-                        </x-tomato-repeater>
+                        </x-tomato-admin-repeater>
                         @if(config('tomato-settings.helpers'))
                             <div v-if="form.payment_online" class="p-1">
                                 <small class="text-red-500"><code>setting('payment_vendors')</code></small>
