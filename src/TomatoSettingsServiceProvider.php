@@ -6,7 +6,8 @@ use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\ServiceProvider;
 use ProtoneMedia\Splade\Facades\SEO;
-use TomatoPHP\TomatoPHP\Services\Menu\TomatoMenuRegister;
+use TomatoPHP\TomatoAdmin\Facade\TomatoMenu;
+use TomatoPHP\TomatoAdmin\Services\Contracts\Menu;
 use TomatoPHP\TomatoRoles\Services\Permission;
 use TomatoPHP\TomatoRoles\Services\TomatoRoles;
 use TomatoPHP\TomatoSettings\Console\TomatoSettingGenerator;
@@ -22,9 +23,6 @@ class TomatoSettingsServiceProvider extends ServiceProvider
 
         //Register Config file
         $this->mergeConfigFrom(__DIR__.'/../config/tomato-settings.php', 'tomato-settings');
-
-        //Register Menus for Tomato Roles
-        TomatoMenuRegister::registerMenu(SettingsMenu::class);
 
         //Register views
         $this->loadViewsFrom(__DIR__.'/../resources/views', 'tomato-settings');
@@ -73,6 +71,35 @@ class TomatoSettingsServiceProvider extends ServiceProvider
     public function boot(): void
     {
         $this->registerSettingsConfigPass();
+
+
+        TomatoMenu::register([
+            Menu::make()
+                ->group(trans('tomato-settings::global.group'))
+                ->label(trans('tomato-settings::global.site.title'))
+                ->icon("bx bxs-cog")
+                ->route("admin.settings.site.index"),
+            Menu::make()
+                ->group(trans('tomato-settings::global.group'))
+                ->label(trans('tomato-settings::global.email.title'))
+                ->icon("bx bxs-envelope")
+                ->route("admin.settings.email.index"),
+            Menu::make()
+                ->group(trans('tomato-settings::global.group'))
+                ->label(trans('tomato-settings::global.payments.title'))
+                ->icon("bx bxs-credit-card")
+                ->route("admin.settings.payments.index"),
+            Menu::make()
+                ->group(trans('tomato-settings::global.group'))
+                ->label(trans('tomato-settings::global.google.title'))
+                ->icon("bx bxl-google")
+                ->route("admin.settings.google.index"),
+            Menu::make()
+                ->group(trans('tomato-settings::global.group'))
+                ->label(trans('tomato-settings::global.services.title'))
+                ->icon("bx bxs-cloud")
+                ->route("admin.settings.services.index"),
+        ]);
     }
 
     /**
@@ -80,67 +107,69 @@ class TomatoSettingsServiceProvider extends ServiceProvider
      */
     public function registerPermissions(): void
     {
-        //Register Permission For Settings
-        TomatoRoles::register(Permission::make()
-            ->name('admin.settings.site.index')
-            ->guard('web')
-            ->group('settings')
-        );
-        TomatoRoles::register(Permission::make()
-            ->name('admin.settings.site.store')
-            ->guard('web')
-            ->group('settings')
-        );
-        TomatoRoles::register(Permission::make()
-            ->name('admin.settings.email.index')
-            ->guard('web')
-            ->group('settings')
-        );
-        TomatoRoles::register(Permission::make()
-            ->name('admin.settings.email.store')
-            ->guard('web')
-            ->group('settings')
-        );
-        TomatoRoles::register(Permission::make()
-            ->name('admin.settings.google.index')
-            ->guard('web')
-            ->group('settings')
-        );
-        TomatoRoles::register(Permission::make()
-            ->name('admin.settings.google.store')
-            ->guard('web')
-            ->group('settings')
-        );
-        TomatoRoles::register(Permission::make()
-            ->name('admin.settings.services.index')
-            ->guard('web')
-            ->group('settings')
-        );
-        TomatoRoles::register(Permission::make()
-            ->name('admin.settings.services.store')
-            ->guard('web')
-            ->group('settings')
-        );
-        TomatoRoles::register(Permission::make()
-            ->name('admin.settings.themes.index')
-            ->guard('web')
-            ->group('settings')
-        );
-        TomatoRoles::register(Permission::make()
-            ->name('admin.settings.themes.store')
-            ->guard('web')
-            ->group('settings')
-        );
-        TomatoRoles::register(Permission::make()
-            ->name('admin.settings.payments.index')
-            ->guard('web')
-            ->group('settings')
-        );
-        TomatoRoles::register(Permission::make()
-            ->name('admin.settings.payments.store')
-            ->guard('web')
-            ->group('settings')
-        );
+        if(class_exists(TomatoRoles::class)){
+            //Register Permission For Settings
+            TomatoRoles::register(Permission::make()
+                ->name('admin.settings.site.index')
+                ->guard('web')
+                ->group('settings')
+            );
+            TomatoRoles::register(Permission::make()
+                ->name('admin.settings.site.store')
+                ->guard('web')
+                ->group('settings')
+            );
+            TomatoRoles::register(Permission::make()
+                ->name('admin.settings.email.index')
+                ->guard('web')
+                ->group('settings')
+            );
+            TomatoRoles::register(Permission::make()
+                ->name('admin.settings.email.store')
+                ->guard('web')
+                ->group('settings')
+            );
+            TomatoRoles::register(Permission::make()
+                ->name('admin.settings.google.index')
+                ->guard('web')
+                ->group('settings')
+            );
+            TomatoRoles::register(Permission::make()
+                ->name('admin.settings.google.store')
+                ->guard('web')
+                ->group('settings')
+            );
+            TomatoRoles::register(Permission::make()
+                ->name('admin.settings.services.index')
+                ->guard('web')
+                ->group('settings')
+            );
+            TomatoRoles::register(Permission::make()
+                ->name('admin.settings.services.store')
+                ->guard('web')
+                ->group('settings')
+            );
+            TomatoRoles::register(Permission::make()
+                ->name('admin.settings.themes.index')
+                ->guard('web')
+                ->group('settings')
+            );
+            TomatoRoles::register(Permission::make()
+                ->name('admin.settings.themes.store')
+                ->guard('web')
+                ->group('settings')
+            );
+            TomatoRoles::register(Permission::make()
+                ->name('admin.settings.payments.index')
+                ->guard('web')
+                ->group('settings')
+            );
+            TomatoRoles::register(Permission::make()
+                ->name('admin.settings.payments.store')
+                ->guard('web')
+                ->group('settings')
+            );
+        }
     }
 
     public function registerSettingsConfigPass(): void
