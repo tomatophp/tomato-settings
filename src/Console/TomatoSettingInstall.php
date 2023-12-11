@@ -44,8 +44,6 @@ class TomatoSettingInstall extends Command
     public function handle()
     {
         $this->info('🍅 Publish Settings Vendor Assets');
-        $this->callSilent('optimize:clear');
-        $this->call('tomato-components:install');
         $this->artisanCommand(["migrate"]);
         $this->artisanCommand(["optimize:clear"]);
         $this->info('🍅 Tomato Settings installed successfully.');
