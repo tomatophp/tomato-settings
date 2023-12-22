@@ -12,7 +12,10 @@ use TomatoPHP\TomatoRoles\Services\Permission;
 use TomatoPHP\TomatoRoles\Services\TomatoRoles;
 use TomatoPHP\TomatoSettings\Console\TomatoSettingGenerator;
 use TomatoPHP\TomatoSettings\Console\TomatoSettingInstall;
+use TomatoPHP\TomatoSettings\Facades\TomatoSettings;
 use TomatoPHP\TomatoSettings\Menus\SettingsMenu;
+use TomatoPHP\TomatoSettings\Services\Contracts\SettingHold;
+use TomatoPHP\TomatoSettings\Services\SettingHolderHandler;
 
 class TomatoSettingsServiceProvider extends ServiceProvider
 {
@@ -75,30 +78,92 @@ class TomatoSettingsServiceProvider extends ServiceProvider
 
         TomatoMenu::register([
             Menu::make()
-                ->group(trans('tomato-settings::global.group'))
-                ->label(trans('tomato-settings::global.site.title'))
+                ->group(__('Settings'))
+                ->label(__('Settings'))
                 ->icon("bx bxs-cog")
-                ->route("admin.settings.site.index"),
-            Menu::make()
-                ->group(trans('tomato-settings::global.group'))
-                ->label(trans('tomato-settings::global.email.title'))
-                ->icon("bx bxs-envelope")
-                ->route("admin.settings.email.index"),
-            Menu::make()
-                ->group(trans('tomato-settings::global.group'))
-                ->label(trans('tomato-settings::global.payments.title'))
-                ->icon("bx bxs-credit-card")
-                ->route("admin.settings.payments.index"),
-            Menu::make()
-                ->group(trans('tomato-settings::global.group'))
-                ->label(trans('tomato-settings::global.google.title'))
-                ->icon("bx bxl-google")
-                ->route("admin.settings.google.index"),
-            Menu::make()
-                ->group(trans('tomato-settings::global.group'))
-                ->label(trans('tomato-settings::global.services.title'))
-                ->icon("bx bxs-cloud")
-                ->route("admin.settings.services.index"),
+                ->route("admin.settings.index")
+        ]);
+
+        app()->bind('tomato-settings', function () {
+            return new SettingHolderHandler();
+        });
+
+        TomatoSettings::register([
+            SettingHold::make()
+                ->label(__('SEO Settings'))
+                ->icon('bx bx-search')
+                ->route('admin.settings.seo.index')
+                ->description(__('Name, Logo, Site Profile'))
+                ->group(__('General')),
+            SettingHold::make()
+                ->label(__('Interface Settings'))
+                ->icon('bx bx-globe')
+                ->route('admin.settings.site.index')
+                ->description(__('Site Menu, Site Social Media links, etc.'))
+                ->group(__('General')),
+            SettingHold::make()
+                ->label(__('Location Settings'))
+                ->icon('bx bx-map')
+                ->route('admin.settings.local.index')
+                ->description(__('Contacts, Country, Language, Currency, etc.'))
+                ->group(__('General')),
+            SettingHold::make()
+                ->label(__('Email SMTP Services'))
+                ->icon('bx bx-envelope')
+                ->route('admin.settings.email.index')
+                ->description(__('SMTP, Sender, etc.'))
+                ->group(__('Services')),
+            SettingHold::make()
+                ->label(__('Google Services'))
+                ->icon('bx bxl-google')
+                ->color('#e43e2a')
+                ->route('admin.settings.google.index')
+                ->description(__('Google API Key, Google Cloud Key, etc.'))
+                ->group(__('Services')),
+            SettingHold::make()
+                ->label(__('Google Firebase'))
+                ->color('#feca2c')
+                ->icon('bx bxl-firebase')
+                ->route('admin.settings.google-firebase.index')
+                ->description(__('Google Firebase JSON, Google Cloud Messaging.'))
+                ->group(__('Services')),
+            SettingHold::make()
+                ->label(__('Google reCAPTCHA'))
+                ->icon('https://upload.wikimedia.org/wikipedia/commons/thumb/a/ad/RecaptchaLogo.svg/2048px-RecaptchaLogo.svg.png')
+                ->route('admin.settings.google-recap.index')
+                ->description(__('Google reCAPTCHA Key, etc.'))
+                ->group(__('Services')),
+            SettingHold::make()
+                ->label(__('Payment Gateway'))
+                ->icon('bx bx-credit-card')
+                ->route('admin.settings.payments.index')
+                ->description(__('Active Payment Gate, Select Default one, etc.'))
+                ->group(__('Services')),
+            SettingHold::make()
+                ->label(__('Facebook Services'))
+                ->color('#0169e4')
+                ->icon('bx bxl-meta')
+                ->route('admin.settings.services-facebook.index')
+                ->description(__('Meta Pixcel, Facebook Chat Box, Facebook App, etc.'))
+                ->group(__('Services')),
+            SettingHold::make()
+                ->label(__('AddThis Services'))
+                ->icon('https://upload.wikimedia.org/wikipedia/commons/1/1d/AddThis_logo.png')
+                ->route('admin.settings.services-addthis.index')
+                ->description(__('Link addThis with API, etc.'))
+                ->group(__('Services')),
+            SettingHold::make()
+                ->label(__('SMS Gates Services'))
+                ->icon('bx bxs-megaphone')
+                ->route('admin.settings.services-sms.index')
+                ->description(__('Link any SMS gate with API,MessageBird, Twilo etc.'))
+                ->group(__('Services')),
+            SettingHold::make()
+                ->label(__('Shipping Gates Services'))
+                ->icon('bx bxs-truck')
+                ->route('admin.settings.services-shipping.index')
+                ->description(__('Link shipping gateway with API,DHL, Posta etc.'))
+                ->group(__('Services'))
         ]);
     }
 

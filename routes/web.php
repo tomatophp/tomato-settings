@@ -2,7 +2,53 @@
 
 
 use TomatoPHP\TomatoRoles\Http\Middleware\Can;
+use TomatoPHP\TomatoSettings\Http\Controllers\SettingsController;
 use TomatoPHP\TomatoSettings\Http\Controllers\SiteSettingsController;
+
+Route::middleware(['web', 'splade', 'verified'])->prefix('admin')->name('admin.')->group(function () {
+    Route::get('/settings', [SettingsController::class, 'index'])->name('settings.index');
+});
+
+
+Route::middleware(['web', 'splade', 'verified'])->prefix('admin')->name('admin.')->group(function () {
+    Route::get('/settings/local', [\TomatoPHP\TomatoSettings\Http\Controllers\LocalSettingsController::class, 'index'])->name('settings.local.index');
+    Route::post('/settings/local', [\TomatoPHP\TomatoSettings\Http\Controllers\LocalSettingsController::class, 'store'])->name('settings.local.store');
+});
+
+Route::middleware(['web', 'splade', 'verified'])->prefix('admin')->name('admin.')->group(function () {
+    Route::get('/settings/services/facebook', [\TomatoPHP\TomatoSettings\Http\Controllers\FacebookServicesSettingsController::class, 'index'])->name('settings.services-facebook.index');
+    Route::post('/settings/services/facebook', [\TomatoPHP\TomatoSettings\Http\Controllers\FacebookServicesSettingsController::class, 'store'])->name('settings.services-facebook.store');
+});
+
+Route::middleware(['web', 'splade', 'verified'])->prefix('admin')->name('admin.')->group(function () {
+    Route::get('/settings/services/addthis', [\TomatoPHP\TomatoSettings\Http\Controllers\AddThisServicesSettingsController::class, 'index'])->name('settings.services-addthis.index');
+    Route::post('/settings/services/addthis', [\TomatoPHP\TomatoSettings\Http\Controllers\AddThisServicesSettingsController::class, 'store'])->name('settings.services-addthis.store');
+});
+
+Route::middleware(['web', 'splade', 'verified'])->prefix('admin')->name('admin.')->group(function () {
+    Route::get('/settings/services/sms', [\TomatoPHP\TomatoSettings\Http\Controllers\SMSServicesSettingsController::class, 'index'])->name('settings.services-sms.index');
+    Route::post('/settings/services/sms', [\TomatoPHP\TomatoSettings\Http\Controllers\SMSServicesSettingsController::class, 'store'])->name('settings.services-sms.store');
+});
+
+Route::middleware(['web', 'splade', 'verified'])->prefix('admin')->name('admin.')->group(function () {
+    Route::get('/settings/services/shipping', [\TomatoPHP\TomatoSettings\Http\Controllers\ShippingServicesSettingsController::class, 'index'])->name('settings.services-shipping.index');
+    Route::post('/settings/services/shipping', [\TomatoPHP\TomatoSettings\Http\Controllers\ShippingServicesSettingsController::class, 'store'])->name('settings.services-shipping.store');
+});
+
+Route::middleware(['web', 'splade', 'verified'])->prefix('admin')->name('admin.')->group(function () {
+    Route::get('/settings/google/recap', [\TomatoPHP\TomatoSettings\Http\Controllers\GoogleRecapSettingsController::class, 'index'])->name('settings.google-recap.index');
+    Route::post('/settings/google/recap', [\TomatoPHP\TomatoSettings\Http\Controllers\GoogleRecapSettingsController::class, 'store'])->name('settings.google-recap.store');
+});
+
+Route::middleware(['web', 'splade', 'verified'])->prefix('admin')->name('admin.')->group(function () {
+    Route::get('/settings/google/firebase', [\TomatoPHP\TomatoSettings\Http\Controllers\GoogleFirebaseSettingsController::class, 'index'])->name('settings.google-firebase.index');
+    Route::post('/settings/google/firebase', [\TomatoPHP\TomatoSettings\Http\Controllers\GoogleFirebaseSettingsController::class, 'store'])->name('settings.google-firebase.store');
+});
+
+Route::middleware(['web', 'splade', 'verified'])->prefix('admin')->name('admin.')->group(function () {
+    Route::get('/settings/seo', [\TomatoPHP\TomatoSettings\Http\Controllers\SEOSettingsController::class, 'index'])->name('settings.seo.index');
+    Route::post('/settings/seo', [\TomatoPHP\TomatoSettings\Http\Controllers\SEOSettingsController::class, 'store'])->name('settings.seo.store');
+});
 
 Route::middleware(['web', 'splade', 'verified'])->prefix('admin')->name('admin.')->group(function () {
     Route::get('/settings/site', [SiteSettingsController::class, 'index'])->name('settings.site.index');
@@ -28,9 +74,3 @@ Route::middleware(['web', 'splade', 'verified'])->prefix('admin')->name('admin.'
     Route::get('/settings/payments', [\TomatoPHP\TomatoSettings\Http\Controllers\PaymentsSettingsController::class, 'index'])->name('settings.payments.index');
     Route::post('/settings/payments', [\TomatoPHP\TomatoSettings\Http\Controllers\PaymentsSettingsController::class, 'store'])->name('settings.payments.store');
 });
-//TODO: Theme setting for frontend actions with Builder package
-//Route::middleware(['web', 'splade', 'verified'])->prefix('admin')->name('admin.')->group(function () {
-//    Route::get('/settings/themes', [\TomatoPHP\TomatoSettings\Http\Controllers\ThemesSettingsController::class, 'index'])->name('settings.themes.index');
-//    Route::post('/settings/themes', [\TomatoPHP\TomatoSettings\Http\Controllers\ThemesSettingsController::class, 'store'])->name('settings.themes.store');
-//});
-
