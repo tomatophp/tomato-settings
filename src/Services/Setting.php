@@ -9,6 +9,7 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 use ProtoneMedia\Splade\Facades\Toast;
@@ -60,6 +61,11 @@ class Setting extends Controller
         //Save Media
         foreach ($media as $item) {
             if ($request->hasFile($item)) {
+                $filePath = storage_path('public/settings/'. $item .  '.'.$request->file($item)->extension());
+                $checkIfExist = File::exists($filePath);
+                if($checkIfExist){
+                    File::delete($filePath);
+                }
                 $request->file($item)->storeAs('public/settings', $item .  '.'.$request->file($item)->extension());
                 $setting->{$item} = url('storage/settings/'.$item .'.'.$request->file($item)->extension());
             }
