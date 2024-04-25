@@ -69,6 +69,10 @@ class TomatoSettingsServiceProvider extends ServiceProvider
 
         $this->registerPermissions();
 
+        app()->bind('tomato-settings', function () {
+            return new SettingHolderHandler();
+        });
+
     }
 
     public function boot(): void
@@ -83,11 +87,6 @@ class TomatoSettingsServiceProvider extends ServiceProvider
                 ->icon("bx bxs-cog")
                 ->route("admin.settings.index")
         ]);
-
-        app()->bind('tomato-settings', function () {
-            return new SettingHolderHandler();
-        });
-
 
         $settings = [];
 
