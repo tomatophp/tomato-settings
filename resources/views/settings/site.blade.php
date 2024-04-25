@@ -2,6 +2,9 @@
     <x-slot name="header">
         {{trans('tomato-settings::global.site.title')}}
     </x-slot>
+    <x-slot:icon>
+        bx bx-globe
+    </x-slot:icon>
 
     <div class="flex flex-col gap-4 mb-4">
         <div>
@@ -22,7 +25,7 @@
                         @endif
                     </div>
                     <div class="flex items-center gap-4">
-                        <x-splade-submit :label="trans('tomato-admin::global.save')" />
+                        <x-tomato-admin-submit spinner :label="trans('tomato-admin::global.save')" />
                     </div>
                 </x-splade-form>
             </x-tomato-settings-card>
@@ -42,7 +45,7 @@
                         @endif
                     </div>
                     <div class="flex items-center gap-4">
-                        <x-splade-submit :label="trans('tomato-admin::global.save')" />
+                        <x-tomato-admin-submit spinner :label="trans('tomato-admin::global.save')" />
                     </div>
                 </x-splade-form>
             </x-tomato-settings-card>

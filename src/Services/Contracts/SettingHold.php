@@ -52,7 +52,7 @@ class SettingHold
      * @var ?string
      * @example #fefefe
      */
-    public ?string $color = "#000";
+    public ?string $color = null;
 
     /**
      * @var string|null

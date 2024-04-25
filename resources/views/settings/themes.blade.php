@@ -10,7 +10,7 @@
                     <x-splade-input id="site_name" name="site_name" type="text" label="Site Name" required autofocus />
 
                     <div class="flex items-center gap-4">
-                        <x-splade-submit :label="trans('tomato-admin::global.save')" />
+                        <x-tomato-admin-submit spinner :label="trans('tomato-admin::global.save')" />
                     </div>
                 </x-splade-form>
             </x-tomato-settings-card>

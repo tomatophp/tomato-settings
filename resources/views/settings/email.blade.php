@@ -1,7 +1,10 @@
 <x-tomato-admin-layout>
-    <x-slot name="header">
+    <x-slot:header>
         {{trans('tomato-settings::global.email.title')}}
     </x-slot>
+    <x-slot:icon>
+        bx bx-envelope
+    </x-slot:icon>
 
     <div class="flex flex-col gap-4 mb-4">
         <div>
@@ -73,7 +76,7 @@
                     </div>
 
                     <div class="flex items-center gap-4">
-                        <x-splade-submit :label="trans('tomato-admin::global.save')" />
+                        <x-tomato-admin-submit spinner :label="trans('tomato-admin::global.save')" />
                     </div>
                 </x-splade-form>
             </x-tomato-settings-card>
