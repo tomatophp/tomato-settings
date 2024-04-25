@@ -26,7 +26,7 @@
                             </div>
                         @endif
                         <h1 class="font-bold text-lg">{{$item->label}}</h1>
-                        <p class="text-sm text-zinc-400">{{$item->description}}</p>
+                        <p class="text-sm text-zinc-400 text-center">{{$item->description}}</p>
                     </x-splade-link>
                 @endforeach
             </div>
