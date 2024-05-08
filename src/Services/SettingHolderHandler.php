@@ -42,7 +42,7 @@ class SettingHolderHandler
      */
     public function load(): Collection
     {
-        return $this->settings;
+        return $this->settings->reverse();
     }
 
     public function get(): Collection
